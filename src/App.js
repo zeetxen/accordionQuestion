@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import data from "./components/data";
+import Questions from "./components/Questions";
 
 function App() {
+  const [questions, setQuestion] = useState(data);
+  const [activeId, setActiveId] = useState(null);
+
+  const toggleQuestion = (id) => {
+    const newActiveId = id === activeId ? null : id;
+    setActiveId(newActiveId);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <Questions
+        questions={questions}
+        activeId={activeId}
+        toggleQuestion={toggleQuestion}
+      />
+    </main>
   );
 }
-
 export default App;
